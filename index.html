@@ -5,21 +5,20 @@
   <title>Data Sensor</title>
 </head>
 <body>
-  <h1>Data dari Google Sheet</h1>
-  <div id="data"></div>
+  <h1>Antrian Online Sederhana </h1>
+  <div> Antrian : <div id="data"></div></div>
 
   <script>
     async function ambilData() {
       let url = "https://script.google.com/macros/s/AKfycbxPSn3zIgtxPLTLAyvDtfQFMqh6MHxtU3-BwSNxB4sbOd1IIlnLQ5u9N0M3XFOSzkJz/exec"; 
-      let res = await fetch(url, { method: "POST" });
+      let res = await fetch(url, { 
+        method: "POST", 
+        body: new URLSearchParams({ row: 2, col: 1 }) 
+      });
       let json = await res.json();
 
-      let html = "<table border='1'><tr><th>Waktu</th><th>Sensor1</th><th>Sensor2</th></tr>";
-      json.forEach(row => {
-        html += `<tr><td>${row.waktu}</td><td>${row.sensor1}</td><td>${row.sensor2}</td></tr>`;
-      });
-      html += "</table>";
-      document.getElementById("data").innerHTML = html;
+      document.getElementById("data").innerHTML =
+        `Row: ${json.row}, Col: ${json.col}, Value: ${json.value}`;
     }
 
     ambilData();
