@@ -6,7 +6,7 @@
 </head>
 <body>
   <h1>Antrian Online Sederhana </h1>
-  <div> Antrian : <div id="data"></div></div>
+  <div>  <div id="data"></div></div>
 
   <script>
     async function ambilData() {
@@ -18,7 +18,7 @@
       let json = await res.json();
 
       document.getElementById("data").innerHTML =
-        `Row: ${json.row}, Col: ${json.col}, Value: ${json.value}`;
+        `Antrian : ${json.value}`;
     }
 
     ambilData();
