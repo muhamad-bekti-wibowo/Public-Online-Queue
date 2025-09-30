@@ -1,1 +1,28 @@
 
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Data Sensor</title>
+</head>
+<body>
+  <h1>Data dari Google Sheet</h1>
+  <div id="data"></div>
+
+  <script>
+    async function ambilData() {
+      let url = "https://script.google.com/macros/s/AKfycbwNoUI4rjC3ssGpSH-wgkbp0_6GX4ZGPFqeXBxHfVYB9B70tUfqAc3M84AI01v86PVb/exec"; 
+      let res = await fetch(url, { method: "POST" });
+      let json = await res.json();
+
+      let html = "<table border='1'><tr><th>Waktu</th><th>Sensor1</th><th>Sensor2</th></tr>";
+      json.forEach(row => {
+        html += `<tr><td>${row.waktu}</td><td>${row.sensor1}</td><td>${row.sensor2}</td></tr>`;
+      });
+      html += "</table>";
+      document.getElementById("data").innerHTML = html;
+    }
+
+    ambilData();
+  </script>
+</body>
+</html>
